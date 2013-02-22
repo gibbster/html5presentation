@@ -395,7 +395,7 @@
         functionality of the page by one resource.
 
         -->
-        <script onload="slow_loaded()" src="js/slow.js"></script>
+        <script async onload="slow_loaded()" src="js/slow.js"></script>
         <script>
           console.log("this has run after the 'async' script");
           slow_loaded();
