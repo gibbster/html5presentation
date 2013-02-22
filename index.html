@@ -4,16 +4,142 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
+        <!--
+
+        Doctype: html5 has an amazingly simple doctype...
+          DOCTYPE html
+
+        Reason enough to switch to html5, IMHO.
+
+
+        Check out Paul Irish's browser degradation support.
+
+        Rather than having a separate stylesheet for each IE version,
+        have a single conditional that sets a class on the body. Then
+        in your css, you can do things like the following:
+
+        a.foo { ... statements for modern browsers ... }
+        .lt-ie9 a.foo { ... statements supporting IE prior to version 9 ... }
+
+        Similar idea for no-js.
+
+
+        -->
+
+
+
+
+
+
+
+
+
+
+        <!-- 
+
+        meta: charset is new in html5. It should be set to the preferred
+        MIME name for the encoding.
+
+        Really, you should use utf-8, unless you really know what you're
+        doing.
+
+        -->
+
+
         <meta charset="utf-8">
+
+
+
+
+
+
+
+
+
+        <!--
+        
+        meta: X-UA-Compatible is not really a standard, but it can hint
+        at how the browser should render the page. ASAIK it's only useful
+        for IE.
+
+        You can set IE to one of:
+         * 5
+         * EmulateIE7
+         * 7
+         * EmulateIE8
+         * 8
+         * EmulateIE9
+         * 9
+         * edge
+
+        Edge tells IE to use the highest mode available.
+
+        chrome=1 tells the browser to use Google Chrome Frame if available
+
+
+        -->
+
+
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title></title>
+
+        
+        
+
+        <title>HTML5 Demo</title>
         <meta name="description" content="">
+
+        <style>
+          [required] {
+            border-color: #88a;
+            -webkit-box-shadow: 0 0 3px rgba(0, 0, 255, .5);
+          }
+          :invalid {
+            border-color: #e88;
+            -webkit-box-shadow: 0 0 5px rgba(255, 0, 0, .8);
+          }
+
+          section {
+            border: 1px solid blue;
+            border-radius: 25px;
+            margin: 20px 100px;
+            padding: 50px;
+          }
+
+        </style>
+
+        <!--
+
+        viewport is quite useful.
+
+        It hints at the initial size of the viewport for the benefit
+        of most mobile devices. It's ignored by desktop and laptop
+        browsers.
+
+        If you set up a responsive site but it keeps on loading with
+        a full width view, check out this parameter
+
+        -->
+
+
         <meta name="viewport" content="width=device-width">
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
+
+
+
+
+
+        <!--
+
+        Look! No type="text/javascript"!
+
+        Frankly, 99.99% it's going to be javascript, so html5 wisely made
+        that the default.
+
+        -->
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
     </head>
     <body>
@@ -21,20 +147,272 @@
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
 
-        <!-- Add your site or application content here -->
-        <p>Hello world! This is HTML5 Boilerplate.</p>
+        <!--
 
+        Part the first: new semantic tags and attributes
+
+        -->
+        <section class="hidden">
+          <h1>Semantic tags and new attributes</h1>
+
+          <!--
+
+          Check it out: the header tag. 
+
+          It's a really nice way of grouping headers and subheaders.
+
+          Also new in html5 is a new way to structure headers.
+
+          In previous versions of html, the recommended way was to nest
+          headers on a document level. 
+
+          I.e. you have something that looks like this:
+
+          h1
+          - h2
+          - h2
+          - - h3
+          - - h3
+          - h2
+          - - h3
+          - - - h4
+          - - - h4
+
+          In html5, you can use something like this:
+
+
+          <doctype html>
+          <title>Hello, world!</title>
+          <h1>This is a section</h1>
+          <section><h1>And this a subsection!</h1></section>
+
+          That is, you should use h1 as a header for each section. 
+          This is actually pretty convenient from a CMS perspective
+          since it allows you to pull in a piece of content from a 
+          database without worrying which level it will be nested in.
+          -->
+
+
+          <article>
+            <header>
+              <h2>New tags</h2>
+              <h3>Or: bye-bye DIVs!</h3>
+            </header>
+          </article>
+
+          <nav>
+            <ul>
+              <li><a href="html5rocks.com">html5rocks.com</a></li>
+              <li><a href="html5doctor.com">html5doctor.com</a></li>
+              <li><a href="paulirish.com">paulirish.com</a></li>
+              <li><a href="developer.mozilla.org">developer.mozilla.org</a></li>
+            </ul>
+          </nav>
+
+          <aside>
+            <p>This is a section that is not critical for the main flow of the
+              article</p>
+          </aside>
+
+          <!-- 
+
+          Some form stuff.
+
+          Note: div's aren't obsolete!
+
+          -->
+
+          <form>
+            <fieldset>
+              <label>My favourite fruit:</label>
+              <input list="fruit"/>
+              <datalist id="fruit">
+                <option value="Banana"/>
+                <option value="Durian"/>
+                <option value="Pineapple"/>
+              </datalist>
+            </fieldset>
+
+              
+            <details>
+              <summary>Meters and progress bars</summary>
+              <progress>Please wait...</progress>
+              <progress value="45" max="100">Working...</progress>
+              <meter min="0" max="100" value="70">Getting there...</meter>
+            </details>
+
+            <fieldset>
+              <label>Required field</label>
+              <input type="text" required />
+            </fieldset>
+
+            <fieldset>
+              <label>Email field</label>
+              <input type="email" />
+            </fieldset>
+
+            <fieldset>
+              <label>Date field</label>
+              <input type="date" />
+            </fieldset>
+
+            <fieldset>
+              <label>Range field</label>
+              <input type="range" min="0" max="100" value="33" />
+            </fieldset>
+
+            <fieldset>
+              <label>Search field</label>
+              <input type="search" />
+            </fieldset>
+
+            <fieldset>
+              <label>Telephone field</label>
+              <input type="tel" placeholder="(555) 555-5555"
+                       pattern="^\(?\d{3}\)?[-\s]\d{3}[-\s]\d{4}.*?$" />
+            </fieldset>
+
+            <fieldset>
+              <label>Color field</label>
+              <input type="color"/>
+            </fieldset>
+
+            <fieldset>
+              <label>Number field</label>
+              <input type="number" step="1" min="0" max="5" value="3" />
+            </fieldset>
+
+          </form>
+          <div>
+
+        </section>
+
+        <section class="hidden">
+          <h1>Article list</h1>
+          <article>
+            <header>
+              <h1>Lorem Ipsum</h1>
+              </h2>Dolores</h2>
+              <h3>Published <time datetime="2010-11-08">2010</time></h3>
+            </header>
+            <p>Yadda Yadda ...</p>
+          </article>
+          <article>
+            <header>
+              <h1>Lorem Ipsum 2</h1>
+              </h2>Dolores</h2>
+              <h3>Published <time datetime="2010-11-08">2010</time></h3>
+            </header>
+            <p>Yadda Yadda ...</p>
+          </article>
+          <article>
+            <header>
+              <h1>Lorem Ipsum</h1>
+              </h2>Dolores</h2>
+              <h3>Published <time datetime="2010-11-08">2010</time></h3>
+            </header>
+            <p>Yadda Yadda ...</p>
+          </article>
+          <article>
+            <header>
+              <h1>Lorem Ipsum</h1>
+              </h2>Dolores</h2>
+              <h3>Published <time datetime="2010-11-08">2010</time></h3>
+            </header>
+            <p>Yadda Yadda ...</p>
+          </article>
+          <article>
+            <header>
+              <h1>Lorem Ipsum</h1>
+              </h2>Dolores</h2>
+              <h3>Published <time datetime="2010-11-08">2010</time></h3>
+            </header>
+            <p>Yadda Yadda ...</p>
+          </article>
+          <article>
+            <header>
+              <h1>Lorem Ipsum</h1>
+              </h2>Dolores</h2>
+              <h3>Published <time datetime="2010-11-08">2010</time></h3>
+            </header>
+            <p>Yadda Yadda ...</p>
+          </article>
+        </section>
+
+        <section class="hidden">
+          <h1>CSS stuff</h1>
+          <ul>
+            <li>Keyframe animations</li>
+            <li>Transitions</li>
+            <li>Gradients</li>
+            <li>Border magic</li>
+            <li>Media queries</li>
+          </ul>
+        </section>
+
+        <!--
+
+        Loading scripts at the end. Considered best practice for quick
+        loading sites.
+
+
+        -->
+
+        <!--
+
+        What's this "//" business? Don't we need a protocol?
+
+        Nope. This'll use whatever protocol is used to load the page. It 
+        avoids the nasty "some elements of this page are unsecured" message.
+
+
+        -->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+
+        <!--
+
+        If we can't load from googleapis for some reason (like we're
+        offline) then load a local version.
+        -->
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.0.min.js"><\/script>')</script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
 
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
-            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-            s.parentNode.insertBefore(g,s)}(document,'script'));
+          var slow_loader = 0;
+
+          function slow_loaded() {
+            console.log("the value of slow_loader is", slow_loader);
+          }
         </script>
+
+        <!--
+
+        Pretty awesome stuff: asynchronous loading.
+
+        Why should you care? For the same reason all these scripts are
+        at the bottom. You don't want to be blocked from using the
+        functionality of the page by one resource.
+
+        -->
+        <script onload="slow_loaded()" src="js/slow.js"></script>
+        <script>
+          console.log("this has run after the 'async' script");
+          slow_loaded();
+        </script>
+
     </body>
+
+    <!--
+
+    Resources:
+
+      * html5rocks.com
+      * html5doctor.com
+      * paulirish.com
+      * developer.mozilla.org
+      * html5readiness.com
+      * html5test.com
+
+    -->
 </html>
